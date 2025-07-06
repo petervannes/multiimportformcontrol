@@ -1,5 +1,8 @@
 export type MultiInputType = {
-  Label: string;
-  size: number;
-  maxLength: number
+  [key: string]: {
+    label: string;
+    size: number;
+    maxLength: number;
+    value: string
+  }
 }

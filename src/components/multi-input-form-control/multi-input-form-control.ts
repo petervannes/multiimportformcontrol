@@ -25,11 +25,6 @@ import {FocusMonitor} from '@angular/cdk/a11y';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 import {MultiInputType} from './multi-input-form-control-types';
 
-export class MyMultiInput {
-  constructor(public area: string, public exchange: string, public subscriber: string,) {
-  }
-}
-
 @Component({
   selector: 'multi-input-form-control',
   imports: [FormsModule, ReactiveFormsModule],
@@ -42,9 +37,11 @@ export class MyMultiInput {
   },
 })
 
-export class MultiInputFormControl implements MatFormFieldControl<MyMultiInput>, OnDestroy {
+export class MultiInputFormControl implements MatFormFieldControl<MultiInputType>, OnDestroy {
 
-  inputDefinition = input<MultiInputType[]>() ;
+  inputDefinition = input.required<MultiInputType>() ;
+  readonly _value = model<MultiInputType | null>(null, {alias: 'value'});  //revise 'alias'
+
 
   // MatformFieldControl overrides
   static nextId = 0; // Shared across all instances of component class
@@ -77,7 +74,7 @@ export class MultiInputFormControl implements MatFormFieldControl<MyMultiInput>,
     alias: 'disabled',
     transform: booleanAttribute,
   });
-  readonly _value = model<MyMultiInput | null>(null, {alias: 'value'});
+
 
 
   protected readonly _formField = inject(MAT_FORM_FIELD, {
@@ -125,7 +122,7 @@ export class MultiInputFormControl implements MatFormFieldControl<MyMultiInput>,
     return this._disabled();
   }
 
-  get value(): MyMultiInput | null {
+  get value(): MultiInputType | null {
     return this._value();
   }
 
@@ -161,25 +158,25 @@ export class MultiInputFormControl implements MatFormFieldControl<MyMultiInput>,
       }
     });
 
-    effect(() => {
-      const value = this._value() || new MyMultiInput('', '', '');
-      untracked(() => this.parts.setValue(value));
-    });
+    // effect(() => {
+    //   const value = this._value() || new MyMultiInput[]('', '', '');
+    //   untracked(() => this.parts.setValue(value));
+    // });
 
     this.parts.statusChanges.pipe(takeUntilDestroyed()).subscribe(() => {
       this.stateChanges.next();
     });
 
-    this.parts.valueChanges.pipe(takeUntilDestroyed()).subscribe(value => {
-      const tel = this.parts.valid
-        ? new MyMultiInput(
-          this.parts.value.area || '',
-          this.parts.value.exchange || '',
-          this.parts.value.subscriber || '',
-        )
-        : null;
-      this._updateValue(tel);
-    });
+    // this.parts.valueChanges.pipe(takeUntilDestroyed()).subscribe(value => {
+    //   const tel = this.parts.valid
+    //     ? new MyMultiInput[](
+    //       this.parts.value.area || '',
+    //       this.parts.value.exchange || '',
+    //       this.parts.value.subscriber || '',
+    //     )
+    //     : null;
+    //   this._updateValue(tel);
+    // });
   }
 
   ngOnDestroy() {
@@ -232,7 +229,7 @@ export class MultiInputFormControl implements MatFormFieldControl<MyMultiInput>,
     }
   }
 
-  writeValue(tel: MyMultiInput | null): void {
+  writeValue(tel: MultiInputType | null): void {
     this._updateValue(tel);
   }
 
@@ -253,18 +250,21 @@ export class MultiInputFormControl implements MatFormFieldControl<MyMultiInput>,
     this.onChange(this.value);
   }
 
-  private _updateValue(tel: MyMultiInput | null) {
+  private _updateValue(tel: MultiInputType | null) {
     const current = this._value();
-    if (
-      tel === current ||
-      (tel?.area === current?.area &&
-        tel?.exchange === current?.exchange &&
-        tel?.subscriber === current?.subscriber)
-    ) {
-      return;
-    }
+    // if (
+    //   tel === current ||
+    //   (tel?.area === current?.area &&
+    //     tel?.exchange === current?.exchange &&
+    //     tel?.subscriber === current?.subscriber)
+    // ) {
+    //   return;
+    // }
     this._value.set(tel);
   }
+
+  protected readonly Object = Object;
+  protected readonly JSON = JSON;
 }
 
 

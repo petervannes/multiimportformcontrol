@@ -1,29 +1,29 @@
 <div [formGroup]="form">
+<!--  <mat-form-field [appearance]="'fill'">-->
+<!--    <mat-label>Phone number</mat-label>-->
+<!--    <multi-input-form-control formControlName="tel"  required></multi-input-form-control>-->
+<!--    <mat-icon matSuffix>phone</mat-icon>-->
+<!--    <mat-hint>Include area code</mat-hint>-->
+<!--  </mat-form-field>-->
+<!--  <p>Entered value: {{form.valueChanges | async | json}}</p>-->
+
   <mat-form-field [appearance]="'fill'">
-    <mat-label>Phone number</mat-label>
-    <multi-input-form-control formControlName="tel"  required></multi-input-form-control>
-    <mat-icon matSuffix>phone</mat-icon>
-    <mat-hint>Include area code</mat-hint>
+    <mat-label>Time period</mat-label>
+    <multi-input-form-control formControlName="time_period"  [inputDefinition]="inputDefinition" required></multi-input-form-control>
+    <mat-icon matSuffix>date_range</mat-icon>
+    <mat-hint>JJJJ-MM</mat-hint>
   </mat-form-field>
   <p>Entered value: {{form.valueChanges | async | json}}</p>
 
-  <mat-form-field [appearance]="'fill'">
-    <mat-label>Phone number</mat-label>
-    <multi-input-form-control formControlName="tel"  [inputDefinition]="inputDefinition" required></multi-input-form-control>
-    <mat-icon matSuffix>phone</mat-icon>
-    <mat-hint>Include area code</mat-hint>
-  </mat-form-field>
-  <p>Entered value: {{form.valueChanges | async | json}}</p>
 
 
-
-  <br/><br/>
-  <h2>Demo</h2>
-  <mat-form-field appearance="outline">
-    <mat-label>Phone number</mat-label>
-    <input matInput formControlName="default"  required>
-    <mat-icon matSuffix>demo</mat-icon>
-    <mat-hint>a hint here</mat-hint>
-  </mat-form-field>
+<!--  <br/><br/>-->
+<!--  <h2>Demo</h2>-->
+<!--  <mat-form-field appearance="outline">-->
+<!--    <mat-label>Phone number</mat-label>-->
+<!--    <input matInput formControlName="default"  required>-->
+<!--    <mat-icon matSuffix>demo</mat-icon>-->
+<!--    <mat-hint>a hint here</mat-hint>-->
+<!--  </mat-form-field>-->
 </div>
 

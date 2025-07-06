@@ -15,30 +15,35 @@ import {MultiInputType} from '../multi-input-form-control/multi-input-form-contr
     FormsModule,
     ReactiveFormsModule,
     MatFormFieldModule,
-    forwardRef(() => MultiInputFormControl),
+    // forwardRef(() => MultiInputFormControl),
+    MultiInputFormControl,
     MatIconModule,
     AsyncPipe,
     JsonPipe,
-    MatInput,
+
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 
 export class FormControlDemo {
-  readonly form = new FormGroup({
-    tel: new FormControl(null),
-    default: new FormControl(null),
-  });
 
-  inputDefinition: MultiInputType[] = [{
-    Label: 'Jaar',
+  inputDefinition: MultiInputType = {
+    year : {
+    label: 'Jaar',
     size: 3,
-    maxLength: 3
+    maxLength: 3,
+    value: "" ,
   },
-    {
-      Label: 'Maand',
+    month: {
+      label: 'Maand',
       size: 3,
-      maxLength: 3
-    }]
+      maxLength: 3,
+      value: "",
+    }}
+
+  readonly form = new FormGroup({
+    time_period: new FormControl<MultiInputType>(this.inputDefinition),
+    // default: new FormControl(null),
+  });
 
 }
